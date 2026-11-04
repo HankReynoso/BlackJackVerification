@@ -40,15 +40,15 @@ Departures from plain Monte Carlo control, both command-line settings: the first
 ```
 python3 -m venv .venv && .venv/bin/pip install numba numpy pytest
 .venv/bin/python -m bjrl.train --run runs/main --workers 10 --hands 300000000
-.venv/bin/python -m bjrl.ui.server --run runs/main --port 8765   # open http://localhost:8765
+.venv/bin/python -m bjrl.ui.app --run runs/main   # opens a native window (tkinter)
 .venv/bin/python -m pytest bjrl/tests -q
 ```
 
-The UI works during training or after. It shows the Hard, Soft and Pairs charts with cells that differ from optimal outlined, a scrubber with play/pause through every snapshot, and match and regret curves over hands played.
+The viewer is a local window that rereads the run files every 1.5 seconds, so it works during training or after. It shows the Hard, Soft and Pairs charts with cells that differ from optimal outlined, a scrubber with play/pause through every snapshot, and match and regret curves over hands played.
 
 ## Layout
 
 - `bjrl/rules.py` rules and table shapes. `bjrl/sim.py` numba game and learner. `bjrl/truth.py` exact DP. `bjrl/train.py` CLI and snapshot writer.
-- `bjrl/ui/` server and single-page UI. `bjrl/ui/fake_run.py` writes a synthetic run for UI work.
+- `bjrl/ui/app.py` native tkinter viewer. `bjrl/ui/fake_run.py` writes a synthetic run for UI work.
 - `bjrl/tests/` pytest suite.
 - The top-level `*.py` scripts and PNGs are an earlier attempt, unrelated to `bjrl/`.
